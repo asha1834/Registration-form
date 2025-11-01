@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Registration Form</h2>
+      <input type="text" id="name" placeholder="Enter Name" required />
+      <input type="number" id="age" placeholder="Enter age" required />
+      <input type="text" id="rollno" placeholder="Enter Roll Number" required />
+
+      <select id="department" required>
+        <option value="" disabled selected>Select Department</option>
+        <option>CSE</option>
+        <option>IT</option>
+        <option>ECE</option>
+        <option>EEE</option>
+        <option>MECH</option>
+      </select>
+      <div class="gender-group">
+        Gender:
+        <input type="radio" name="gender" value="Male" /> Male
+        <input type="radio" name="gender" value="Female" /> Female
+      </div>
+      <input type="number" id="marks" placeholder="Enter Marks" required />
+      <button onclick="addData()">Submit</button>
+    </div>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Roll No</th>
+          <th>Dept</th>
+          <th>Gender</th>
+          <th>Marks</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      function addData() {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let roll = document.getElementById("rollno").value;
+        let dept = document.getElementById("department").value;
+        let gender = document.querySelector('input[name="gender"]:checked');
+        let marks = document.getElementById("marks").value;
+
+        if (
+          !gender ||
+          name === "" ||
+          age === "" ||
+          roll === "" ||
+          dept === "" ||
+          marks === ""
+        ) {
+          alert("Please fill all the fields");
+          return;
+        }
+
+        let table = document
+          .getElementById("dataTable")
+          .getElementsByTagName("tbody")[0];
+        let newRow = table.insertRow();
+        newRow.innerHTML = `<td>${name}</td>
+            <td>${age}</td>
+            <td>${roll}</td>
+            <td>${dept}</td>
+            <td>${gender.value}</td>
+            <td>${marks}</td>`;
+
+        document.getElementById("name").value = "";
+        document.getElementById("age").value = "";
+        document.getElementById("rollno").value = "";
+        document.getElementById("department").value = "";
+        document.getElementById("marks").value = "";
+        document.querySelector('input[name="gender"]:checked').checked = false;
+      }
+    </script>
+  </body>
+</html>
